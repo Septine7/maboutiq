@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Vitrine avec Carrousel</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('https://www.atouteslesfilles.com/assets/images/boutique_photos/5759_2011-10-11-boutique-02.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #333;
+  }
+  
+  h2 {
+    color:  #fff;
+
+  }
+  
+  header {
+    background-color: rgba(51, 51, 51, 0.9);
+    position: relative;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px; /* Arrondi aux coins */
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Changement de couleur de fond au hover */
+    color: #333; /* Changement de couleur du texte au hover */
+}
+
+nav ul li {
+    position: relative; /* Position relative for dropdown positioning */
+}
+
+.dropdown {
+    display: none; /* Hide dropdowns by default */
+    position: relative;
+    background-color: rgba(51, 51, 51, 0.9);
+    list-style: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    border-radius: 5px; /* Rounded corners */
+    z-index: 1000; /* Ensure it appears above other content */
+}
+
+nav ul li:hover .dropdown {
+    display: block; /* Show dropdown on hover */
+}
+
+.dropdown li {
+    padding: 10px 20px; /* Padding for dropdown items */
+}
+
+.dropdown li a {
+    color: white; /* Dropdown link color */
+    text-decoration: none; /* Remove underline */
+}
+
+.dropdown li a:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Background on hover */
+    color: #333; /* Text color on hover */
+}
+
+  
+  main {
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .carousel-item {
+    background-color: rgba(51, 51, 51, 0.9);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .carousel-item img {
+    width: 200px;
+    height: 200px;
+  }
+  
+  button.add-to-cart,
+  button.remove-item {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.add-to-cart:hover,
+  button.remove-item:hover {
+    background-color: #af0000;
+  }
+
+  #cart-section {
+    display: none; /* Cache par défaut */
+    color: #fff;
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Ombre douce */
+    padding: 20px; /* Espacement interne */
+    margin: 20px; /* Espacement externe */
+    text-align: left; /* Alignement à gauche du texte */
+  }
+
+  #cart-items div {
+    display: flex; /* Utilise le flex pour aligner le texte et le bouton */
+    justify-content: space-between; /* Espace entre le texte et le bouton */
+    align-items: center; /* Centre verticalement */
+    padding: 10px 0; /* Espacement vertical pour chaque article */
+    border-bottom: 1px solid #ddd; /* Ligne de séparation */
+
+    }
+
+    .remove-item {
+        color: white; /* Couleur du texte */
+        border: none; /* Pas de bordure */
+        padding: 5px 10px; /* Espacement interne */
+        border-radius: 5px; /* Coins arrondis */
+        cursor: pointer; /* Curseur de main */
+        transition: background-color 0.3s ease; /* Transition pour le hover */
+    }
+    
+  
+  #checkout-button {
+   
+    background-color: rgba(51, 51, 51, 0.9); /* Couleur verte pour le bouton de checkout */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centrer le texte */
+    padding: 10px; /* Espacement interne */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    text-decoration: none; /* Pas de soulignement */
+    transition: background-color 0.3s ease; /* Transition pour le hover */
+}
+
+#checkout-button:hover {
+    background-color: #4cae4c; /* Couleur plus foncée lors du hover */
+}
+  footer {
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+    <div class="logo">
+        <h1>Ma Boutique</h1>
+    </div>
+    <nav>
+        <ul>
+            <li>
+                <a href="#home">Accueil</a>
+            
+            </li>
+            <li>
+                <a href="#about">À propos</a>
+                <ul class="dropdown">
+                    <li><a href="#about1">About Us</a></li>
+                    <li><a href="#about2">Our Team</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#products">Produits</a>
+                <ul class="dropdown">
+                    <li><a href="#products1">Sneakers</a></li>
+                    <li><a href="#products2">Costumes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+                <ul class="dropdown">
+                    <li><a href="#contact1">Contact Form</a></li>
+                    <li><a href="#contact2">FAQ</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#cart"><i class="fas fa-shopping-cart"></i> Panier (<span id="cart-count">0</span>)</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+  <!-- Section du Panier -->
+  <section id="cart-section" style="display: none;">
+    <h2>Votre Panier</h2>
+    <div id="cart-items"></div>
+    <h3>Total: <span id="total-price">0</span> FR</h3>
+    <a href="#" id="checkout-button"><i class="fas fa-delete-cart"></i>Passer à la caisse</a> <!-- Bouton de checkout -->
+  </section>
+
+  <!-- Main Section -->
+  <main>
+    <section id="carousel">
+      <h2 id="products1">Nos Chaussures Sneaker</h2>
+      <div class="carousel-container">
+        <div class="carousel-item">
+          <img src="image/Sneaker.jpg" alt="Produit 1">
+          <h3>Sneaker</h3>
+          <p>Prix: 120.000FR</p>
+          <p class="description">Conçue pour le confort et le style, cette Sneaker s’adapte à toutes vos tenues.</p>
+          <button class="add-to-cart" data-name="Sneaker" data-price="120000">Ajouter au panier</button>
+        </div>
+        <div class="carousel-item">
+          <img src="image/prada.jpeg" alt="Produit 2">
+          <h3>Prada</h3>
+          <p>Prix: 20.000FR</p>
+          <p class="description">Un sac élégant de la marque Prada, parfait pour toute occasion.</p>
+          <button class="add-to-cart" data-name="Prada" data-price="20000">Ajouter au panier</button>
+        </div>
+        <div class="carousel-item">
+          <img src="image/adidas.jpeg" alt="Produit 3">
+          <h3>Adidas</h3>
+          <p>Prix: 40.500fr</p>
+          <p class="description">Chaussures Adidas classiques, alliant sport et style moderne.</p>
+          <button class="add-to-cart" data-name="Adidas" data-price="40000">Ajouter au panier</button>
+        </div>
+      </div>
+    </section>
+    <section id="carousel">
+        <div class="carousel-container">
+          <div class="carousel-item">
+            <img src="image/air force nike.jpeg" alt="Produit 1">
+            <h3>Air Force Nike</h3>
+            <p>Prix: 120.400FR</p>
+            <p class="description">Conçue pour le confort et le style, cette Sneaker s’adapte à toutes vos tenues.</p>
+            <button class="add-to-cart" data-name="Air Force Nike" data-price="120400">Ajouter au panier</button>
+          </div>
+          <div class="carousel-item">
+            <img src="image/balmain.jpeg" alt="Produit 2">
+            <h3>Balmain</h3>
+            <p>Prix: 200.000FR</p>
+            <p class="description">Un sac élégant de la marque Prada, parfait pour toute occasion.</p>
+            <button class="add-to-cart" data-name="Balmain" data-price="200000">Ajouter au panier</button>
+          </div>
+          <div class="carousel-item">
+            <img src="image/nike.png" alt="Produit 3">
+            <h3>Nike</h3>
+            <p>Prix: 40.500fr</p>
+            <p class="description">Chaussures Adidas classiques, alliant sport et style moderne.</p>
+            <button class="add-to-cart" data-name="Nike" data-price="40000">Ajouter au panier</button>
+          </div>
+        </div>
+      </section>
+  
+
+    <section id="carousel">
+      <h2 id="products2">Nos Costumes</h2>
+      <div class="carousel-container">
+        <div class="carousel-item">
+          <img src="image/BLAZER SLIM.jpg" alt="Produit 1">
+          <h3>Blazer slim</h3>
+          <p>Prix: 120.000FR</p>
+          <p class="description">Blazer élégant avec coupe ajustée pour un look professionnel et stylé.</p>
+          <button class="add-to-cart" data-name="Blazer slim" data-price="120000">Ajouter au panier</button>
+        </div>
+        <div class="carousel-item">
+          <img src="image/BLAZER.webp" alt="Produit 2">
+          <h3>Blazer</h3>
+          <p>Prix: 20.000FR</p>
+          <p class="description">Blazer classique, idéal pour les événements formels et informels.</p>
+          <button class="add-to-cart" data-name="Blazer" data-price="20000">Ajouter au panier</button>
+        </div>
+        <div class="carousel-item">
+          <img src="image/smok blanc.avif" alt="Produit 3">
+          <h3>Smoking Blanc</h3>
+          <p>Prix: 100.000 Fr</p>
+          <p class="description">Smoking blanc élégant, parfait pour les grandes occasions.</p>
+          <button class="add-to-cart" data-name="Smoking Blanc" data-price="100000">Ajouter au panier</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Ma Boutique. Tous droits réservés.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
